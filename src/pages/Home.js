@@ -6,6 +6,7 @@ import CharacterCard from "../components/CharacterCard";
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Pagination from "@mui/material/Pagination";
+import { cacheExpTime } from "../constants/Constants";
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -15,12 +16,30 @@ const Home = () => {
 
     useEffect(() => {
         const fetchCharacters = async () => {
+
+            const cachedData = JSON.parse(localStorage.getItem(pageNumber));
+            if (cachedData) {
+                const timestamp = cachedData.timestamp;
+
+                // Check if data is not older than cache expiration time
+                if (new Date().getTime() - timestamp < cacheExpTime) {
+                    dispatch(setCharacters(cachedData.data));
+                    return;
+                }
+            }
+            //if cached data is not available or expired
             const response = await getCharacters(pageNumber);
+
+            const newCachedData = { timestamp: new Date().getTime(), data: response };
+            localStorage.setItem(pageNumber, JSON.stringify(newCachedData));
+
             dispatch(setCharacters(response));
         }
-        fetchCharacters();
+       
+        fetchCharacters();       
     }, [pageNumber, dispatch]);
 
+    //function to handle page select from pagination
     const handlePageSelect = (event, value) => {
         dispatch(setPage(value))
     }
@@ -40,7 +59,7 @@ const Home = () => {
                         })
                     ) : (
                         <div>
-                            <p>No characters</p>
+                            <h3>No characters</h3>
                         </div>
                     )}
                 </Grid>

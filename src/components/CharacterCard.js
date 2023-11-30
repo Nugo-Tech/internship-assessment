@@ -4,6 +4,8 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 
 const CharacterCard = ({ character }) => {
+
+    //function to check a given string starts with a vowel
     const isStartWithVowel = (string) => {
         let firstLetter = string.charAt(0).toLowerCase();
         return /^[aeiou]/i.test(firstLetter);
