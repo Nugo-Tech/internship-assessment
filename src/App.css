@@ -20,3 +20,21 @@
   align-items: center;
   height: 100%;
 }
+
+/* Footer component */
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+  background-color: #1976d2;
+  opacity: 0.9;
+}
+
+.footer p {
+  font-size: 16px;
+  letter-spacing: 2px;
+  line-height: 36px;
+  color: white;
+  font-weight: 400;
+}

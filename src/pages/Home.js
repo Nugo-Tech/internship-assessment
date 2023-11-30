@@ -28,7 +28,7 @@ const Home = () => {
     return (
         <div>
             <Container maxWidth="lg" >
-                <h1 className="title">Rick & Morty Characters</h1>
+                <h1 className="title">Characters</h1>
                 <Grid container spacing={5}>
                     {characters.length > 0 ? (
                         characters.map((character) => {
