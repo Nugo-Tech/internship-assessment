@@ -1,15 +1,10 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchAllCharacters } from '../features/characterSlice';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import CharacterCard from '../components/CharacterCard';
+import Pagination from '../components/Pagination';
 
 const CharacterList = () => {
     const characters = useSelector((state) => state.character.characterData);
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(fetchAllCharacters());
-    }, []);
 
     return (
         <div>
@@ -20,6 +15,9 @@ const CharacterList = () => {
                 {characters.map((character) => (
                     <CharacterCard key={character.id} character={character}/>
                 ))}
+            </div>
+            <div className='py-5'>
+                <Pagination />
             </div>
         </div>
     );
