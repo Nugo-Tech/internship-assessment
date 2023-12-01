@@ -1,20 +1,32 @@
+import {  useTheme } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-
+  
 const CharacterCard = ({ character }) => {
+    const theme = useTheme();
 
     //function to check a given string starts with a vowel
     const isStartWithVowel = (string) => {
         let firstLetter = string.charAt(0).toLowerCase();
         return /^[aeiou]/i.test(firstLetter);
     }
-    return (
+    return (       
         <div className="char-card-container">
-            <Card sx={{ width: 300 }} >
+            <Card sx={{ 
+                width: 300, 
+                [theme.breakpoints.down('sm')]: {
+                  width: 250, 
+                }
+            }} >
                 <CardMedia
-                    sx={{ height: 300 }}
+                    sx={{ 
+                        height: 300, 
+                        [theme.breakpoints.down('sm')]: {
+                          height: 250, 
+                        }
+                }}
                     image={character.image}
                     title={character.name}
                 />
