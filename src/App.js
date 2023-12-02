@@ -3,6 +3,7 @@ import ViewData from './components/ViewData';
 import { useEffect } from 'react';
 import { fetchData } from './store/reducers/getDataSlice';
 import HandlePages from './components/HandlePages';
+import { Helmet } from 'react-helmet-async';
 
 function App() {
   const getData = useSelector((state) => state.getData);
@@ -33,6 +34,9 @@ function App() {
 
   return (
     <div className="d-flex flex-column site-container">
+      <Helmet>
+        <title>Rick and Morty API Characters</title>
+      </Helmet>
       <header>
         <h1>Rick and Morty API Characters</h1>
       </header>
