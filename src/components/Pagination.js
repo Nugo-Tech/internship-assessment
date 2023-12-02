@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAllCharacters } from '../features/characterSlice';
+import { fetchAllCharactersThunk } from '../features/characterSlice';
 
 const Pagination = () => {
     const currentPage = useSelector(state => state.character.currentPage);
@@ -9,7 +9,7 @@ const Pagination = () => {
 
     const handlePageChange = (number) => {
         if(number !== '..') {
-            dispatch(fetchAllCharacters(number));
+            dispatch(fetchAllCharactersThunk(number));
         }
     }
 

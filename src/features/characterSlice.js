@@ -1,7 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
-
-const API_URL = 'https://rickandmortyapi.com/api/character/';
+import { fetchAllCharacters } from '../api/characterAPI';
 
 const generatePaginationArray = (totalPages, currentPage) => {
     const maxPagesToShow = 1;
@@ -28,18 +26,9 @@ const generatePaginationArray = (totalPages, currentPage) => {
     return paginationArray;
   }
 
-export const fetchAllCharacters = createAsyncThunk(
+export const fetchAllCharactersThunk = createAsyncThunk(
     'characters/fetchAll',
-    async (pageNumber) => {
-        try {
-            const {data, status} = await axios.get(`${API_URL}?page=${pageNumber}`);
-            if(status === 200){
-                return data;
-            }
-        } catch(err) {
-            console.error(err);
-        }
-    }
+    async (pageNumber) => fetchAllCharacters(pageNumber)
 );
 
 const initialState = {
@@ -56,7 +45,7 @@ export const characterSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(fetchAllCharacters.fulfilled, (state, { payload, meta }) => {
+            .addCase(fetchAllCharactersThunk.fulfilled, (state, { payload, meta }) => {
                 state.characterData = payload.results;
                 state.totalPages = payload.info.pages;
                 const pagesArray = generatePaginationArray(payload.info.pages, meta.arg);
