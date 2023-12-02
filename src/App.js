@@ -15,10 +15,12 @@ function App() {
   const currentPage = getData.currentPage;
   const dataPerPages = getData.dataPerPages;
 
+  //calculate total pages
   if (getData.data.results) {
     var totalPages = getData.data.results.length / dataPerPages;
   }
 
+  //function to create a number array for given value
   function createArrayWithPages(n) {
     const resultArray = [];
     for (let i = 1; i <= n; i++) {
@@ -26,6 +28,7 @@ function App() {
     }
     return resultArray;
   }
+  //create a number array size of totalPages and values 1 to totalPages
   const pages = createArrayWithPages(totalPages);
 
   return (
