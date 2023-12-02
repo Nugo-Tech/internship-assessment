@@ -1,23 +1,53 @@
-import logo from './logo.svg';
-import './App.css';
+import { useDispatch, useSelector } from 'react-redux';
+import ViewData from './components/ViewData';
+import { useEffect } from 'react';
+import { fetchData } from './store/reducers/getDataSlice';
+import HandlePages from './components/HandlePages';
+import { Helmet } from 'react-helmet-async';
 
 function App() {
+  const getData = useSelector((state) => state.getData);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchData());
+  }, [dispatch]);
+
+  const currentPage = getData.currentPage;
+  const dataPerPages = getData.dataPerPages;
+
+  //calculate total pages
+  if (getData.data.results) {
+    var totalPages = getData.data.results.length / dataPerPages;
+  }
+
+  //function to create a number array for given value
+  function createArrayWithPages(n) {
+    const resultArray = [];
+    for (let i = 1; i <= n; i++) {
+      resultArray.push(i);
+    }
+    return resultArray;
+  }
+  //create a number array size of totalPages and values 1 to totalPages
+  const pages = createArrayWithPages(totalPages);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div className="d-flex flex-column site-container">
+      <Helmet>
+        <title>Rick and Morty API Characters</title>
+      </Helmet>
+      <header>
+        <h1>Rick and Morty API Characters</h1>
       </header>
+      <main>
+        <ViewData />
+      </main>
+      <footer>
+        <div className="text-center">
+          <HandlePages pages={pages} currentPage={currentPage} />
+        </div>
+      </footer>
     </div>
   );
 }
