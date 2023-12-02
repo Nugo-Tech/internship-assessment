@@ -17,9 +17,9 @@ const CharacterCard = ({character}) => {
             alt={character.name}
           />
         </div>
-        <div className='flex flex-col text-start ps-2 pb-5 pt-2'>
-          <span>{character.name}</span>
-          <span>
+        <div className='flex flex-col text-start ps-2 pb-5 pt-2 text-slate-500'>
+          <span className='font-bold'>{character.name}</span>
+          <span >
             {character.name}
             {isFirstLetterVowel(character.species) ? ' is an '+ character.species : ' is a ' + character.species }
             {character.origin.name === 'unknown' ? '' : ' from ' + character.origin.name}

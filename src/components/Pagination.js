@@ -25,8 +25,8 @@ const Pagination = () => {
                         onClick={() => handlePageChange(pageNumber)}
                         className={`w-12 flex justify-center items-center cursor-pointer 
                             leading-5 transition duration-150 ease-in  rounded-full 
-                            ${currentPage === pageNumber ? 'bg-slate-600 text-white' : ''}  
-                            ${(pageNumber !== '..' && pageNumber !== currentPage )? 'hover:bg-slate-400 hover:text-white' : ''}`}
+                            ${currentPage === pageNumber ? 'bg-slate-500 text-white' : ''}  
+                            ${(pageNumber !== '..' && pageNumber !== currentPage )? 'hover:bg-slate-300' : ''}`}
                     >
                         {pageNumber}
                     </div>

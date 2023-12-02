@@ -8,7 +8,7 @@ const CharacterList = () => {
 
     return (
         <div>
-            <div className='header p-5 my-5 text-center text-slate-500 text-2xl font-bold'>
+            <div className='header p-5 mb-5 mt-3 text-center text-slate-500 md:text-3xl text-2xl font-bold bg-slate-300'>
                 <h1>Rick and Morty Characters</h1>
             </div>
             <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-y-8 px-6 mx-6'>
